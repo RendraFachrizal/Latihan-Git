@@ -1,3 +1,0 @@
-# Latihan-Git
-
-Hello
