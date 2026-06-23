@@ -32,3 +32,59 @@ console.log("Hasil Pengurangan: " + kurang);
 console.log("Hasil Perkalian: " + kali);
 console.log("Hasil Pembagian: " + bagi);
 console.log("Hasil Modulus: " + modulus);
+console.log("a + b = " + a + " + " + b + " = " + tambah);
+
+//Operator Perbandingan
+console.log(1 == 1)
+console.log(1 === 1)
+console.log(1 !=1)
+console.log(1 !== 1)
+console.log(1 > 2)
+console.log(1 >= 2)
+
+//Operator Kondisional
+var status = "Buka";
+var JamBuka = 10;
+
+console.log(                            );
+console.log("Operator Kondisional");
+console.log("--------------------------");
+console.log (status == "Buka" && JamBuka >= 10)
+
+
+//Operator String
+var word = "Web Programming";
+var word1 = "Web";
+var word2 = "Programming";
+var tahun = 2026;
+console.log("Operator String");
+console.log("--------------------------");
+console.log(`${word} ${word2} ,Tahun ${tahun}`);
+
+var word3 = word.substring(4, 15);
+console.log(word3)
+
+console.log("Upper and lower case:");
+console.log("--------------------------");
+console.log(word.toUpperCase());
+console.log(word.toLowerCase());
+
+
+console.log("Trim and replace");
+console.log("--------------------------");
+console.log(word.trim());
+console.log(word.replaceAll("r", "R"));
+
+//Mengubah tipe data lain menjadi String atau sebaliknya
+var angka = 20;
+console.log("--------------------------");
+console.log("Mengubah tipe data lain menjadi String atau sebaliknya");
+console.log(angka);
+console.log(String(angka));
+console.log(angka + 10);
+
+var angka = angka.toString();
+console.log("--------------------------");
+console.log("Mengubah tipe data lain menjadi String atau sebaliknya");
+console.log(angka);
+console.log(angka + angka);
