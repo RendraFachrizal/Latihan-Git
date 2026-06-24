@@ -61,3 +61,18 @@ console.log("Test dengan angka")
 console.log(angka)
 console.log(angka.sort())
 console.log(angka.reverse())
+
+//slice
+console.log("--------------")
+console.log("Sebelum slice: " + peserta)
+console.log("Setelah slice")
+var newestpeserta = peserta.slice(0,2)
+console.log(newestpeserta)
+
+
+//splice
+console.log("--------------")
+console.log("Sebelum splice: " + peserta)
+console.log("Setelah splice")
+peserta.splice(2,0,"Heldi","Huda")
+console.log(peserta)
