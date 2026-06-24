@@ -46,4 +46,4 @@ console.log(namapeserta.split(" "))
 
 //quiz
 console.log("-----------------")
-console.log(namapeserta.length)
+console.log(namapeserta.split(" ").length)
