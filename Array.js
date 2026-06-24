@@ -47,3 +47,17 @@ console.log(namapeserta.split(" "))
 //quiz
 console.log("-----------------")
 console.log(namapeserta.split(" ").length)
+
+
+//sort
+console.log("--------------")
+console.log("Sebelum disort: " + peserta)
+console.log("Setelah disort: ")
+console.log(peserta.sort())
+console.log("Setelah disort terbalik: ")
+console.log(peserta.reverse())
+console.log("--------------")
+console.log("Test dengan angka")
+console.log(angka)
+console.log(angka.sort())
+console.log(angka.reverse())
