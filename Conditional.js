@@ -92,17 +92,28 @@
 // console.log("jumlah terakhir: " + jumlah);
 
 
-// While loop 1
-var flag = 0;
-while(flag <= 10) {
-    console.log("Iterasi ke-" + flag);
-    flag++;
-}
+// // While loop 1
+// var flag = 0;
+// while(flag <= 10) {
+//     console.log("Iterasi ke-" + flag);
+//     flag++;
+// }
 
-// While loop 2
-console.log("---------------------")
-var flag = 10;
-do {
-    console.log("Iterasi ke-" + flag);
-    flag--;
-}while(flag > 0)
+// // While loop 2
+// console.log("---------------------")
+// var flag = 0;
+// do {
+//     console.log("Iterasi ke-" + flag);
+//     flag++;
+// }while(flag < 10)
+
+
+var a = 2;
+while(a <= 10){
+    console.log("Iterasi while ke-" + a)
+    a+=2
+} 
+
+for(var b = 2; b <=10; b+=2){
+    console.log("Iterasi for ke- " + b)
+}
