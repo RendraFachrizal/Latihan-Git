@@ -88,3 +88,36 @@ console.log("--------------------------");
 console.log("Mengubah tipe data lain menjadi String atau sebaliknya");
 console.log(angka);
 console.log(angka + angka);
+
+console.log("--------------------------");
+console.log("Mengubah tipe data string menjadi number");
+var angka = "20";
+console.log(angka);
+console.log(Number(angka));
+console.log(angka + 10);
+console.log(parseInt(angka) + 10);
+
+console.log("--------------------------");
+console.log("Case bilangan desimal");
+var angka1 = 1.5
+var angka2 = 2.5
+console.log(angka1)
+console.log(angka2)
+var angka3 = angka1 + angka2
+console.log(angka3)
+
+
+//Conditional Javascript
+console.log("--------------------------");
+console.log("Conditional Javascript");
+var mood = "happy";
+if (mood == "happy"){
+    console.log("saya bahagia");
+}
+console.log("--------------------------");
+var mood = "happy";
+if (mood == "happy"){
+    console.log("saya bahagia");
+} else {
+    console.log("saya sedih");
+}
