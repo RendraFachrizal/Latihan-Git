@@ -1,29 +1,29 @@
-//let and const
+let and const
 
-// let nama = "John"
-// if(true) 
-//     {
-//         let nama = "Doe"
-//         console.log(nama)
-//     }
-// console.log(nama)
-// console.log("-------------------------------")
+let nama = "John"
+if(true) 
+    {
+        let nama = "Doe"
+        console.log(nama)
+    }
+console.log(nama)
+console.log("-------------------------------")
 
-// const pi = 3.14
-// pi = 22/7
-// console.log(pi)
+const pi = 3.14
+pi = 22/7
+console.log(pi)
 
-// //arrow function
-// var tampilkanNama = function(a) {
-//     console.log("Halo, " + (a))
+//arrow function
+var tampilkanNama = function(a) {
+    console.log("Halo, " + (a))
 
-// }
-// tampilkanNama("Huda")
+}
+tampilkanNama("Huda")
 
-// const sayHello = (a) => {
-//     console.log("Halo, "+ a)
-// }
-// sayHello("Rendra")
+const sayHello = (a) => {
+    console.log("Halo, "+ a)
+}
+sayHello("Rendra")
 
 //Quiz
 const HitungPersergi = (sisi) => {
@@ -34,3 +34,4 @@ const HitungPersergi = (sisi) => {
 }
 
 HitungPersergi(5)
+
