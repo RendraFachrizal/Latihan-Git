@@ -9,9 +9,9 @@ if(true)
 console.log(nama)
 console.log("-------------------------------")
 
-const pi = 3.14
-pi = 22/7
-console.log(pi)
+// const pi = 3.14
+// pi = 22/7
+// console.log(pi)
 
 //arrow function
 var tampilkanNama = function(a) {
