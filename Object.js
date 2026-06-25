@@ -1,32 +1,32 @@
-// //deklarasi object
-// var car ={
-//     brand   : "Ferrari",
-//     type    : "Sports Car",
-//     price   : 50000000,
-//     horsepower : 986
-// }
+//deklarasi object
+var car ={
+    brand   : "Ferrari",
+    type    : "Sports Car",
+    price   : 50000000,
+    horsepower : 986
+}
 
 
-// console.log("-------------------------------")
-// var orang = {
-//     WarnaKulit  : "Sawo Matang",
-//     jeniskelamin : "Laki - laki",
-//     tinggibadan : 175,
-//     beratbadan : 80,
-//     usia : 26,
-//     name : "Rendra"
+console.log("-------------------------------")
+var orang = {
+    WarnaKulit  : "Sawo Matang",
+    jeniskelamin : "Laki - laki",
+    tinggibadan : 175,
+    beratbadan : 80,
+    usia : 26,
+    name : "Rendra"
 
-// }
-
-
+}
 
 
-//array of object
-// var mobil = [
-//     {merk: "BMW", warna: "merah", tipe: "sedan"},
-//     {merk: "Toyota", warna: "hitam", tipe: "box"},
-//     {merk: "Audi", warna: "biru", tipe: "sedan"}
-// ]
+
+
+// array of object
+var mobil = [
+    {merk: "BMW", warna: "merah", tipe: "sedan"},
+    {merk: "Toyota", warna: "hitam", tipe: "box"},
+    {merk: "Audi", warna: "biru", tipe: "sedan"}
+]
 
 var orang = [
 {
@@ -65,9 +65,9 @@ var orang = [
 ]
 
 //.foreach()
-// orang.forEach(function(item){
-//     console.log("warna kulit: " + item.WarnaKulit)
-// })
+orang.forEach(function(item){
+    console.log("warna kulit: " + item.WarnaKulit)
+})
 
 //.map()
 var WarnaKulit = orang.map(function(item){
@@ -80,8 +80,8 @@ var usia = orang.map(function(item){
 
 
 
-// console.log(WarnaKulit)
-// console.log(usia)
+console.log(WarnaKulit)
+console.log(usia)
 
 
 //.filter()
