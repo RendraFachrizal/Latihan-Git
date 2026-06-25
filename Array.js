@@ -76,3 +76,22 @@ console.log("Sebelum splice: " + peserta)
 console.log("Setelah splice")
 peserta.splice(2,0,"Heldi","Huda")
 console.log(peserta)
+
+
+//Looping Array
+console.log("Contoh 1: ")
+var arr = ["Jeruk", "Mangga", "Apel"];
+for(var i = 0; i < arr.length; i++){
+    console.log(arr [i])
+}
+
+console.log("--------------------------------------")
+console.log("Contoh 2: ")
+var names = ["John", "Doe", "Jack"]
+var i = 0
+while (i < names.length){
+    console.log(names[i])
+    i++
+}
+
+
