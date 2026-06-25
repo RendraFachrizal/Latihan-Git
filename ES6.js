@@ -27,10 +27,10 @@
 
 //Quiz
 const HitungPersergi = (sisi) => {
-    const luas = (sisi) => {s * s}
-    const keliling = (sisi) => {4 * s}
-    console.log("Luas Persegi: ", (sisi));
-    console.log("Keliling Persegi: ", (sisi));
+    const luas = (sisi) => {return sisi * sisi}
+    const keliling = (sisi) => {return 4 * sisi}
+    console.log("Luas Persegi: ", luas(sisi));
+    console.log("Keliling Persegi: ", keliling(sisi));
 }
 
 HitungPersergi(5)
