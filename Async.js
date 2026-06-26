@@ -126,3 +126,4 @@ async function checkDataPasien(nomorIdPasien) {
 
 checkDataPasien(5)
 checkDataPasien(1)
+checkDataPasien(0)
