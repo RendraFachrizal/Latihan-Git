@@ -48,6 +48,6 @@ class Car {
 }
 
 mycar = new Car("Ford")
-mobil = new Car("Toyota")
-console.log(mycar.present("Hello"));
-console.log(mobil.present("Hello"))
+// mobil = new Car("Toyota")
+console.log(mycar.present("Hello"))
+// console.log(mobil.present("Hello"))
