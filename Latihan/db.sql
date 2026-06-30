@@ -11,7 +11,7 @@ INSERT INTO mahasiswa(nim, nama, prodi, jenisKelamin, alamat,noHP)
 VALUES(123456, "Muhammad Rendra Fachrizal", "TIK", "Laki - laki", "Samarinda", "087716515904");
 
 UPDATE mahasiswa
-SET alamat = "Balikpapan"
+SET noHp = "087716515902"
 WHERE NIM = 123456;
 
 DELETE FROM mahasiswa
@@ -22,3 +22,7 @@ VALUES(123654, "Rendra Fachrizal", "TIK", "Laki - laki", "Samarinda", "087716515
 
 INSERT INTO mahasiswa(nim, nama, prodi, jenisKelamin, alamat,noHP)
 VALUES(123465, "Fachrizal", "TIK", "Laki - laki", "Samarinda", "087716515904");
+
+
+INSERT INTO mahasiswa()
+VALUES(123579, "Rendra", "TIK", "Perempuan", "Kutai Kartanegara", "087716515900");
