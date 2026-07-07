@@ -53,7 +53,7 @@ const yearMiddleware = (req, res, next) => {
     let {year} = req.query
     if (year !== undefined) {
         if(isNaN(Number(year))) {
-            return res.status(400).json({message: "Year harus berupa angka"})
+            return res.status(400).json({message: "Tahun tidak ditemukan"})
         }
         console.log(`Filter by year: ${year}`)
     }
