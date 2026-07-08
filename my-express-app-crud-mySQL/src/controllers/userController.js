@@ -1,5 +1,6 @@
-const bcrypt = require('bcrypt')
+require('dotenv').config()
 const connectionPool = require('../config/db')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const register = (req, res) => {
@@ -20,7 +21,7 @@ const register = (req, res) => {
             })
         }
 
-        bcrypt.hash(pass, 12, (err,hashedPassword) => {
+        bcrypt.hash(pass, 10, (err,hashedPassword) => {
             if(err) {
                 console.error(err)
                 return res.status(500).json ({
@@ -40,10 +41,12 @@ const register = (req, res) => {
             }
 
             res.status(200).json({message: "Akun berhasil dibuat", 
-                status: "Sukses"
+                status: "Sukses",
+                result: result
             })
         })
-        })
+        }
+    )
     })
 }
 

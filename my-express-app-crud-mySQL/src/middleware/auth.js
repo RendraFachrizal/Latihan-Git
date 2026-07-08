@@ -1,15 +1,19 @@
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
+
+
 const authJWT = (req, res, next) => {
-    const authHeader = req.header("Autorization")
+    const authHeader = req.header("Authorization")
     if (!authHeader){
-        res.setHeader('www-authenticate', 'bearer')
+        res.setHeader('www-Authenticate', 'bearer')
         return res.status(401).json({
             status: "Akses Ditolak",
             message: "Log in terlebih dahulu"
         })
     }
     
-    const token = authHeader.splt(' ')[1]
+    const token = authHeader.split(' ')[1]
+    console.log(token)
     if(!token){
             return res.status(401).json({
             status: "Akses Ditolak",
@@ -17,14 +21,15 @@ const authJWT = (req, res, next) => {
         })
     }
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if(err){
+            if(err){
             return res.status(401).json({
                 status:"Ditolak",
-                message: err.message
+                message: "Invalid token"
             })
         }else{
             req.user = user
             console.log(user)
+            next()
         }
     })
 }
