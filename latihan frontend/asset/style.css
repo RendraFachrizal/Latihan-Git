@@ -1,0 +1,25 @@
+
+    p
+    {
+      background-color: greenyellow;  
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: larger;
+      text-align: justify;
+    }
+
+
+    h1{
+      font-family:'Times New Roman', Times, serif;
+      font-size:very-large;
+      text-align:center;
+    }
+    
+
+    img{
+      width: 500px;
+      
+    }
+
+    div{
+      background-color:aqua
+    }
