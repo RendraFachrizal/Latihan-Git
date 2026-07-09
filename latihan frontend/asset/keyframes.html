@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        /* .animasi{
+            width: 500px;
+            height: 500px;
+            background-color: violet;
+            animation-name: example;
+            animation-duration: 5s;
+        } */
+
+        .progress-bar{
+            width: 100%;
+            height: 50px;
+            background-color: white;
+            animation-name: example;
+            animation-duration: 10s;
+            text-align:right;
+        }
+
+        @keyframes example {
+            0%{
+                background-color: whitesmoke;
+                width: 0%;
+            }
+            25%{
+                background-color: yellow;
+            }
+            50%{
+                background-color: orange;
+            }
+            75%{
+                background-color: red;
+            }
+            100%{
+                background-color: brown;
+                width: 100%;
+            }
+
+        }
+        p{
+            font-size: 5vw;
+        }
+
+        body{
+            background-color: aquamarine;
+        }
+        
+        @media only screen and (max-width: 600px){
+            body {
+                background-color: greenyellow;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="animasi"></div>
+    <div class="progress-bar">Loading</div>
+    <div>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis commodi neque modi similique ullam accusamus totam minus dicta possimus magni laboriosam id officiis sapiente illo, aspernatur animi, voluptates molestiae repellat!
+        Eaque debitis voluptatum at sed dicta placeat, blanditiis quibusdam quo eius distinctio numquam assumenda, nihil accusantium sit corporis sapiente. Nostrum nemo ab nam id fuga. Ad voluptates porro tempore veniam.</p>
+    </div>
+</body>
+</html>
