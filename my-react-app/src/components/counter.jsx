@@ -1,14 +1,23 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Counter = ({start = 0}) => {
     const [count, setCounter] = useState(start)
-    // setCounter(count+1)
+    const [warna, setWarna] = useState("red")
+
+    useEffect(() => {
+        if(count > 10){
+            setWarna("Orange")
+        }
+        setTimeout(() => {
+            setCounter(count+1)
+        },1000)
+    }, [count])
 
     return(
         <>
-        <h1>Count: {count}</h1>
+        <h1 style={{color: warna}}>Count: {count}</h1>
 
-        
+
         </>
     )
 }
