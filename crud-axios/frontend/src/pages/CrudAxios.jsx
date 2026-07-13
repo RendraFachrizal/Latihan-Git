@@ -28,6 +28,21 @@ const CrudAxios = () => {
               <th>Action</th>
             </tr>
           </thead>
+          <tbody>
+            {data.map((movie, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{movie.title_db_movie}</td>
+                  <td>{movie.year_db_movie}</td>
+                  <td>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     </>
