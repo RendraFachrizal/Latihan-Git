@@ -10,6 +10,15 @@ const CrudAxios = () => {
       console.log(data);
     });
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -17,6 +26,29 @@ const CrudAxios = () => {
   return (
     <>
       <h1>Crud Axios</h1>
+      <div className="div-input-movie">
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="title">Movie Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Movie title..."
+            required
+          ></input>
+
+          <label htmlFor="year">Year</label>
+          <input
+            type="number"
+            id="year"
+            name="year"
+            placeholder="Year release..."
+            required
+          ></input>
+
+          <input type="submit" value="Submit"></input>
+        </form>
+      </div>
 
       <div className="div-table-movie">
         <table>
