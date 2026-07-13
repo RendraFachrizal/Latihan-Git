@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const CrudAxios = () => {
   const [data, setData] = useState([]);
+  const [input, setInput] = useState({ movieTitle: "", movieYear: 0 });
 
   const fetchData = () => {
     axios.get("http://localhost:3000/api/movie").then((res) => {
@@ -14,9 +15,19 @@ const CrudAxios = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      await axios.post("http://localhost:3000/api/movie", {
+        title: input.movieTitle,
+        year: input.movieYear,
+      });
+      fetchData();
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const handleChange = (event) => {
+    let { value, name } = event.target;
+    setInput({ ...input, [name]: value });
   };
 
   useEffect(() => {
@@ -31,19 +42,19 @@ const CrudAxios = () => {
           <label htmlFor="title">Movie Title</label>
           <input
             type="text"
-            id="title"
-            name="title"
+            id="movieTitle"
+            name="movieTitle"
             placeholder="Movie title..."
-            required
+            onChange={handleChange}
           ></input>
 
           <label htmlFor="year">Year</label>
           <input
             type="number"
-            id="year"
-            name="year"
+            id="movieYear"
+            name="movieYear"
             placeholder="Year release..."
-            required
+            onChange={handleChange}
           ></input>
 
           <input type="submit" value="Submit"></input>
