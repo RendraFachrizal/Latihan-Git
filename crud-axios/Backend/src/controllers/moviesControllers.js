@@ -28,14 +28,12 @@
 //     res.send(result.title)
 // }
 
-
 // //Middleware
 // const loggerMiddleware = (req, res, next) => {
 //     console.log(`Method: ${req.method}`)
 //     console.log(`URL: ${req.url}`)
 //     next()
 // }
-
 
 // const tokenMiddleware = (req, res, next) => {
 //     let {token} = req.query
@@ -47,7 +45,6 @@
 //         })
 //     }
 // }
-
 
 // const yearMiddleware = (req, res, next) => {
 //     let {year} = req.query
@@ -75,7 +72,6 @@
 //     }
 // }
 
-
 // const getMovieApi = (req, res) => {
 //     let {title,year} = req.query
 //     let result = movies.filter((item) => {
@@ -99,91 +95,87 @@
 //     res.json(result)
 // }
 
-
-// module.exports = 
+// module.exports =
 // {
-//     getMovie, 
-//     getMovieById, 
-//     loggerMiddleware, 
-//     tokenMiddleware, 
-//     yearMiddleware, 
-//     timeMiddleware, 
-//     checkIdMoviesMiddleware, 
-//     getMovieApi, 
+//     getMovie,
+//     getMovieById,
+//     loggerMiddleware,
+//     tokenMiddleware,
+//     yearMiddleware,
+//     timeMiddleware,
+//     checkIdMoviesMiddleware,
+//     getMovieApi,
 //     getMovieByIdApi
 // }
 
-
-
-
-
-const connectionPool = require("../config/db.js")
+const connectionPool = require("../config/db.js");
 const readMovie = (req, res) => {
-    let queryText = "SELECT * FROM db_movies.tb_movie"
-    connectionPool.query(queryText,(err, data) =>{
-        if(err) {
-            console.log(err)
-            return
-        }
-        res.json(data)
-    })
-}
+  let queryText = "SELECT * FROM db_movies.tb_movie";
+  connectionPool.query(queryText, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.json(data);
+  });
+};
 
 const readMovieById = (req, res) => {
-    let {id} = req.params
-    let queryText = `SELECT * FROM db_movies.tb_movie WHERE id_tb_movie = ${id}`
-    connectionPool.query(queryText,(err, data) =>{
-        if(err) {
-            console.log(err)
-            return
-        }
-        res.json(data)
-    })
-}
-
+  let { id } = req.params;
+  let queryText = `SELECT * FROM db_movies.tb_movie WHERE id_tb_movie = ${id}`;
+  connectionPool.query(queryText, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.json(data);
+  });
+};
 
 const createMovie = (req, res) => {
-    let {title, year} = req.body
-    let queryText = `INSERT INTO tb_movie(title_db_movie, year_db_movie)
-    VALUES ("${title}", ${year})`
-    connectionPool.query(queryText,(err,data) => {
-        if(err){
-            console.error(err)
-            return
-        }
-        res.json({message: "Berhasil"})
-    })
-}
-
-
-
-const updatemovie = (req,res) => {
-  let {title,year} = req.body
-  let {id} = req.params
-  let querytext = `UPDATE tb_movie SET title_db_movie = "${title}", year_db_movie = ${year} WHERE id_tb_movie = ${id}`
-
-  connectionPool.query(querytext, [title, year, id], (err,data) =>{
-    if(err){
-      console.log(err)
-      return res.status(500).json({ message: "Database error", error: err })
+  let { title, year } = req.body;
+  let queryText = `INSERT INTO tb_movie(title_db_movie, year_db_movie)
+    VALUES ("${title}", ${year})`;
+  connectionPool.query(queryText, (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
     }
-    res.json({message: "Data berhasil diupdate"})
-  
-  })
-}
+    res.json({ message: "Berhasil" });
+  });
+};
 
-const deletemovie = (req,res) => {
-  let {id} = req.params
-  let querytext = `DELETE FROM tb_movie WHERE id_tb_movie = ${id}`
+const updatemovie = (req, res) => {
+  let { title, year } = req.body;
+  let { id } = req.params;
+  let queryText = `UPDATE tb_movie SET title_db_movie = "${title}", year_db_movie = ${year} WHERE id_tb_movie = ${id}`;
 
-  connectionPool.query(querytext, [id], (err,data) =>{
-    if(err){
-      console.log(err)
-      return res.status(500).json({ message: "Database error", error: err })
+  connectionPool.query(queryText, [title, year, id], (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Database error", error: err });
     }
-    res.json({message: "Data berhasil dihapus"})
-  
-  })
-}
+    res.json({ message: "Data berhasil diupdate" });
+  });
+};
 
-module.exports = {readMovie, readMovieById, createMovie, updatemovie, deletemovie}
+const deletemovie = (req, res) => {
+  let { id } = req.params;
+  let queryText = `DELETE FROM tb_movie WHERE id_tb_movie = ${id}`;
+
+  connectionPool.query(queryText, (err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.json({ Message: "Data Berhasil Dihapus" });
+  });
+};
+
+module.exports = {
+  readMovie,
+  readMovieById,
+  createMovie,
+  updatemovie,
+  deletemovie,
+};

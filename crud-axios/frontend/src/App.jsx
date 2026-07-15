@@ -1,8 +1,7 @@
-import { useState } from "react";
 import "./App.css";
-import Home from "./pages/Home.jsx";
-import CrudAxios from "./pages/CrudAxios.jsx";
 import "./style.css";
+
+import CrudAxios from "./pages/CrudAxios.jsx";
 
 function App() {
   return (

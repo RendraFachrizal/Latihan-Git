@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const Home = () => {
   const [count, setCount] = useState(0);
+
   return (
     <>
       <section id="center">

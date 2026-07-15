@@ -1,24 +1,50 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const API_URL = "http://localhost:3000/api/movie";
+
 const CrudAxios = () => {
   const [data, setData] = useState([]);
-  const [input, setInput] = useState({ movieTitle: "", movieYear: 0 });
+  const [input, setInput] = useState({ movieTitle: "", movieYear: "" });
+  const [editId, setEditId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
+
+  const totalPages = Math.ceil(data.length / rowsPerPage);
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
 
   const fetchData = () => {
-    axios.get("http://localhost:3000/api/movie").then((res) => {
+    axios.get(API_URL).then((res) => {
       setData(res.data);
-      console.log(data);
     });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const resetForm = () => {
+    setInput({ movieTitle: "", movieYear: "" });
+    setEditId(null);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3000/api/movie", {
-        title: input.movieTitle,
-        year: input.movieYear,
-      });
+      if (editId) {
+        await axios.put(`${API_URL}/${editId}`, {
+          title: input.movieTitle,
+          year: input.movieYear,
+        });
+      } else {
+        await axios.post(API_URL, {
+          title: input.movieTitle,
+          year: input.movieYear,
+        });
+      }
+      resetForm();
       fetchData();
     } catch (err) {
       console.error(err);
@@ -30,37 +56,60 @@ const CrudAxios = () => {
     setInput({ ...input, [name]: value });
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+      fetchData();
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  const handleEdit = async (id) => {
+    try {
+      const respond = await axios.get(`${API_URL}/${id}`);
+      const movie = respond.data[0];
+      setInput({
+        movieTitle: movie.title_db_movie,
+        movieYear: movie.year_db_movie,
+      });
+      setEditId(id);
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   return (
     <>
-      <h1>Crud Axios</h1>
+      <h1>CURD AXIOS</h1>
       <div className="div-input-movie">
         <form onSubmit={handleSubmit}>
-          <label htmlFor="title">Movie Title</label>
+          <label htmlFor="movieTitle">Movie Title</label>
           <input
             type="text"
             id="movieTitle"
             name="movieTitle"
-            placeholder="Movie title..."
+            placeholder="Input Your Movie Title.."
+            value={input.movieTitle}
             onChange={handleChange}
-          ></input>
+            required
+          />
 
-          <label htmlFor="year">Year</label>
+          <label htmlFor="movieYear">Movie Year</label>
           <input
             type="number"
             id="movieYear"
             name="movieYear"
-            placeholder="Year release..."
+            placeholder="Input Movie Year.."
+            value={input.movieYear}
             onChange={handleChange}
-          ></input>
+            required
+          />
 
-          <input type="submit" value="Submit"></input>
+          <input type="submit" value={editId ? "Update" : "Submit"} />
+          {editId && <input type="button" value="Cancel" onClick={resetForm} />}
         </form>
       </div>
-
       <div className="div-table-movie">
         <table>
           <thead>
@@ -72,15 +121,31 @@ const CrudAxios = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((movie, index) => {
+            {currentRows.map((item, index) => {
               return (
                 <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{movie.title_db_movie}</td>
-                  <td>{movie.year_db_movie}</td>
+                  <td>{indexOfFirstRow + index + 1}</td>
+                  <td>{item.title_db_movie}</td>
+                  <td>{item.year_db_movie}</td>
                   <td>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <button
+                      className="bt-del"
+                      onClick={() => {
+                        if (confirm("Apa Anda Yakin Menghapus File Ini ?")) {
+                          handleDelete(item.id_tb_movie);
+                        }
+                      }}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      className="bt-edit"
+                      onClick={() => {
+                        handleEdit(item.id_tb_movie);
+                      }}
+                    >
+                      Edit
+                    </button>
                   </td>
                 </tr>
               );
@@ -88,8 +153,24 @@ const CrudAxios = () => {
           </tbody>
         </table>
       </div>
+      <div className="pagination">
+        <button
+          onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+        <span>
+          Page {currentPage} of {totalPages || 1}
+        </span>
+        <button
+          onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+          disabled={currentPage === totalPages || totalPages === 0}
+        >
+          Next
+        </button>
+      </div>
     </>
   );
 };
-
 export default CrudAxios;
