@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-const API_URL = "http://localhost:3000/api/movie";
+import baseURL from "../config/utility";
+// const API_URL = "http://localhost:3000/api/movie";
 
 const CrudAxios = () => {
   const [data, setData] = useState([]);
@@ -16,7 +16,7 @@ const CrudAxios = () => {
   const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
 
   const fetchData = () => {
-    axios.get(API_URL).then((res) => {
+    axios.get(`${baseURL}/api/movie`).then((res) => {
       setData(res.data);
     });
   };
@@ -34,12 +34,12 @@ const CrudAxios = () => {
     event.preventDefault();
     try {
       if (editId) {
-        await axios.put(`${API_URL}/${editId}`, {
+        await axios.put(`${baseURL}/api/movie/${editId}`, {
           title: input.movieTitle,
           year: input.movieYear,
         });
       } else {
-        await axios.post(API_URL, {
+        await axios.post(`${baseURL}/api/movie/`, {
           title: input.movieTitle,
           year: input.movieYear,
         });
@@ -58,7 +58,7 @@ const CrudAxios = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await axios.delete(`${baseURL}/api/movie/${id}`);
       fetchData();
     } catch (err) {
       alert(err);
@@ -67,7 +67,7 @@ const CrudAxios = () => {
 
   const handleEdit = async (id) => {
     try {
-      const respond = await axios.get(`${API_URL}/${id}`);
+      const respond = await axios.get(`${baseURL}/api/movie/${id}`);
       const movie = respond.data[0];
       setInput({
         movieTitle: movie.title_db_movie,
