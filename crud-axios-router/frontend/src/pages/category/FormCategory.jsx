@@ -1,18 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import baseURL from "../../config/utility";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
 const FormCategory = () => {
   let { id } = useParams();
+  let navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [input, setInput] = useState({ nameCategory: "", descCategory: "" });
+  const [input, setInput] = useState({
+    nameCategory: "",
+    descCategory: "",
+    idCategory: null,
+  });
   const [editId, setEditId] = useState(null);
 
   const fetchData = () => {
     axios.get(`${baseURL}/api/category/${id}`).then((res) => {
-      // setData(res.data);
-      console.log(res.data);
+      let {
+        desc_tb_category: descCategory,
+        id_tb_category: idCategory,
+        name_tb_category: nameCategory,
+      } = res.data[0];
+      setInput({ descCategory, idCategory, nameCategory });
+      // console.log(res.data[0]);
     });
   };
 
@@ -28,8 +38,8 @@ const FormCategory = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (editId) {
-        await axios.put(`${baseURL}/api/category/${editId}`, {
+      if (input.idCategory) {
+        await axios.put(`${baseURL}/api/category/${input.idCategory}`, {
           name: input.nameCategory,
           desc: input.descCategory,
         });
@@ -61,6 +71,7 @@ const FormCategory = () => {
   };
 
   const handleEdit = async (id) => {
+    navigate("/category");
     try {
       const respond = await axios.get(`${baseURL}/api/category/${id}`);
       const movie = respond.data[0];
@@ -77,6 +88,7 @@ const FormCategory = () => {
   return (
     <>
       <h1>Edit Category</h1>
+      <h1>ID: {id}</h1>
       <div className="div-input-movie">
         <form onSubmit={handleSubmit}>
           <label htmlFor="nameCategory">Category Name</label>
