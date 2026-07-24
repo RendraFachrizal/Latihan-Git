@@ -16,6 +16,7 @@ const MainRouter = () => {
             <Route path="CrudAxios" element={<CrudAxios />} />
             <Route path="category" element={<TableCategory />} />
             <Route path="category/create" element={<FormCategory />} />
+            <Route path="category/:id/edit" element={<FormCategory />} />
             <Route path="*" element={<NoMatch />} />
           </Route>
         </Routes>

@@ -1,16 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import baseURL from "../../config/utility";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 
 const FormCategory = () => {
+  let { id } = useParams();
   const [data, setData] = useState([]);
   const [input, setInput] = useState({ nameCategory: "", descCategory: "" });
   const [editId, setEditId] = useState(null);
 
   const fetchData = () => {
-    axios.get(`${baseURL}/api/category`).then((res) => {
-      setData(res.data);
+    axios.get(`${baseURL}/api/category/${id}`).then((res) => {
+      // setData(res.data);
+      console.log(res.data);
     });
   };
 
