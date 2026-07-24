@@ -98,7 +98,7 @@ const FormCategory = () => {
           />
 
           <input type="submit" value={editId ? "Update" : "Submit"} />
-          <Link to="/category">back</Link>
+          <Link to="/category">Cancel</Link>
           {editId && <input type="button" value="Cancel" onClick={resetForm} />}
         </form>
       </div>

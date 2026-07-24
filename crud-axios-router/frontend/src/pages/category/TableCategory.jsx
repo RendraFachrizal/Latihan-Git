@@ -67,17 +67,7 @@ const TableCategory = () => {
   };
 
   const handleEdit = async (id) => {
-    try {
-      const respond = await axios.get(`${baseURL}/api/category/${id}`);
-      const category = respond.data[0];
-      setInput({
-        nameCategory: category.name_tb_category,
-        descCategory: category.desc_tb_category,
-      });
-      setEditId(id);
-    } catch (err) {
-      alert(err);
-    }
+    navigate(`/category/${id}/edit`);
   };
 
   const addCategory = () => {
