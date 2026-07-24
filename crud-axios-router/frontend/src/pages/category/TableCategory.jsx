@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import baseURL from "../../config/utility";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const TableCategory = () => {
+  let navigate = useNavigate();
   const [data, setData] = useState([]);
-  //   const [input, setInput] = useState({ nameCategory: "", descCategory: "" });
+  const [input, setInput] = useState({ nameCategory: "", descCategory: "" });
   const [editId, setEditId] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
-
   const totalPages = Math.ceil(data.length / rowsPerPage);
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -33,12 +35,12 @@ const TableCategory = () => {
     event.preventDefault();
     try {
       if (editId) {
-        await axios.put(`${baseURL}/api/movie/${editId}`, {
+        await axios.put(`${baseURL}/api/category/${editId}`, {
           title: input.movieTitle,
           year: input.movieYear,
         });
       } else {
-        await axios.post(`${baseURL}/api/movie/`, {
+        await axios.post(`${baseURL}/api/category/`, {
           title: input.movieTitle,
           year: input.movieYear,
         });
@@ -78,10 +80,16 @@ const TableCategory = () => {
     }
   };
 
+  const addCategory = () => {
+    navigate("create");
+  };
+
   return (
     <>
       <h1>Tabel Kategori</h1>
-      <div className="div-input-movie"></div>
+      <button className="createButton" onClick={addCategory}>
+        Create category
+      </button>
       <div className="div-table-movie">
         <table>
           <thead>

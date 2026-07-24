@@ -1,23 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import baseURL from "../../config/utility";
-
-// const API_URL = "http://localhost:3000/api/movie";
+import { Link } from "react-router";
 
 const FormCategory = () => {
   const [data, setData] = useState([]);
-  const [input, setInput] = useState({ movieTitle: "", movieYear: "" });
+  const [input, setInput] = useState({ nameCategory: "", descCategory: "" });
   const [editId, setEditId] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 10;
-
-  const totalPages = Math.ceil(data.length / rowsPerPage);
-  const indexOfLastRow = currentPage * rowsPerPage;
-  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
 
   const fetchData = () => {
-    axios.get(`${baseURL}/api/movie`).then((res) => {
+    axios.get(`${baseURL}/api/category`).then((res) => {
       setData(res.data);
     });
   };
@@ -27,7 +19,7 @@ const FormCategory = () => {
   }, []);
 
   const resetForm = () => {
-    setInput({ movieTitle: "", movieYear: "" });
+    setInput({ nameCategory: "", descCategory: "" });
     setEditId(null);
   };
 
@@ -35,14 +27,14 @@ const FormCategory = () => {
     event.preventDefault();
     try {
       if (editId) {
-        await axios.put(`${baseURL}/api/movie/${editId}`, {
-          title: input.movieTitle,
-          year: input.movieYear,
+        await axios.put(`${baseURL}/api/category/${editId}`, {
+          name: input.nameCategory,
+          desc: input.descCategory,
         });
       } else {
-        await axios.post(`${baseURL}/api/movie/`, {
-          title: input.movieTitle,
-          year: input.movieYear,
+        await axios.post(`${baseURL}/api/category/`, {
+          name: input.nameCategory,
+          desc: input.descCategory,
         });
       }
       resetForm();
@@ -59,7 +51,7 @@ const FormCategory = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${baseURL}/api/movie/${id}`);
+      await axios.delete(`${baseURL}/api/category/${id}`);
       fetchData();
     } catch (err) {
       alert(err);
@@ -68,11 +60,11 @@ const FormCategory = () => {
 
   const handleEdit = async (id) => {
     try {
-      const respond = await axios.get(`${baseURL}/api/movie/${id}`);
+      const respond = await axios.get(`${baseURL}/api/category/${id}`);
       const movie = respond.data[0];
       setInput({
-        movieTitle: movie.title_db_movie,
-        movieYear: movie.year_db_movie,
+        nameCategory: movie.name_tb_category,
+        descCategory: movie.desc_tb_category,
       });
       setEditId(id);
     } catch (err) {
@@ -82,94 +74,33 @@ const FormCategory = () => {
 
   return (
     <>
-      <h1>CURD AXIOS</h1>
+      <h1>Edit Category</h1>
       <div className="div-input-movie">
         <form onSubmit={handleSubmit}>
-          <label htmlFor="movieTitle">Movie Title</label>
+          <label htmlFor="nameCategory">Category Name</label>
           <input
             type="text"
-            id="movieTitle"
-            name="movieTitle"
-            placeholder="Input Your Movie Title.."
-            value={input.movieTitle}
+            id="nameCategory"
+            name="nameCategory"
+            placeholder="Input Category of the movies..."
+            value={input.nameCategory}
             onChange={handleChange}
             required
           />
 
-          <label htmlFor="movieYear">Movie Year</label>
-          <input
-            type="number"
-            id="movieYear"
-            name="movieYear"
-            placeholder="Input Movie Year.."
-            value={input.movieYear}
+          <label htmlFor="descCategory">Description</label>
+          <textarea
+            name="descCategory"
+            id="descCategory"
+            placeholder="Input Description of the movies..."
+            value={input.descCategory}
             onChange={handleChange}
-            required
           />
 
           <input type="submit" value={editId ? "Update" : "Submit"} />
+          <Link to="/category">back</Link>
           {editId && <input type="button" value="Cancel" onClick={resetForm} />}
         </form>
-      </div>
-      <div className="div-table-movie">
-        <table>
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Title</th>
-              <th>Year</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentRows.map((item, index) => {
-              return (
-                <tr key={index}>
-                  <td>{indexOfFirstRow + index + 1}</td>
-                  <td>{item.title_db_movie}</td>
-                  <td>{item.year_db_movie}</td>
-                  <td>
-                    <button
-                      className="bt-del"
-                      onClick={() => {
-                        if (confirm("Apa Anda Yakin Menghapus File Ini ?")) {
-                          handleDelete(item.id_tb_movie);
-                        }
-                      }}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      className="bt-edit"
-                      onClick={() => {
-                        handleEdit(item.id_tb_movie);
-                      }}
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      <div className="pagination">
-        <button
-          onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          Prev
-        </button>
-        <span>
-          Page {currentPage} of {totalPages || 1}
-        </span>
-        <button
-          onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-          disabled={currentPage === totalPages || totalPages === 0}
-        >
-          Next
-        </button>
       </div>
     </>
   );
